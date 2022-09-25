@@ -33,7 +33,6 @@ public class UserMealsUtil {
              ) {
             totalCaloriesPerDay.put(meal.getDateTime().toLocalDate(), totalCaloriesPerDay.merge(meal.getDateTime().toLocalDate(), meal.getCalories(), Integer::sum));
         }
-        totalCaloriesPerDay.forEach((a,b) -> System.out.println("Дата:" + a + ". Калории: " + b));
 
         List<UserMealWithExcess> mealsList = new ArrayList<>();
         for (UserMeal meal : meals
