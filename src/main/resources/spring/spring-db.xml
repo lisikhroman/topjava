@@ -92,9 +92,36 @@
     </beans>
 
     <beans profile="jdbc">
+        <bean id="JdbcMealRepository"
+              class="ru.javawebinar.topjava.repository.jdbc.JdbcMealRepository" >
+            <constructor-arg index="0" ref=""/>
+            <constructor-arg index="1" ref=""/>
+        </bean>
+        <bean id="JdbcUserRepository"
+              class="ru.javawebinar.topjava.repository.jdbc.JdbcUserRepository" >
+            <constructor-arg index="0" ref=""/>
+            <constructor-arg index="1" ref=""/>
+        </bean>
     </beans>
     <beans profile="jpa">
+        <bean id="MealRepository"
+              class="ru.javawebinar.topjava.repository.jpa.MealRepository" />
+        <bean id="UserRepository"
+              class="ru.javawebinar.topjava.repository.jpa.UserRepository" />
     </beans>
     <beans profile="datajpa">
+        <bean id="CrudMealRepository"
+              class="ru.javawebinar.topjava.repository.datajpa.CrudMealRepository" abstract="true"/>
+        <bean id="CrudUserRepository"
+              class="ru.javawebinar.topjava.repository.datajpa.CrudUserRepository" abstract="true"/>
+        <bean id="DataJpaMealRepository"
+              class="ru.javawebinar.topjava.repository.datajpa.DataJpaMealRepository" >
+            <constructor-arg index="0" ref=""/>
+            <constructor-arg index="1" ref=""/>
+        </bean>
+        <bean id="DataJpaUserRepository"
+              class="ru.javawebinar.topjava.repository.datajpa.DataJpaUserRepository" >
+            <constructor-arg ref=""/>
+        </bean>
     </beans>
 </beans>
