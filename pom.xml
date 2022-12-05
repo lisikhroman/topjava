@@ -36,7 +36,7 @@
         <ehcache.version>3.10.2</ehcache.version>
 
         <!--    Tests  -->
-        <junit.jupiter.version>5.9.1</junit.jupiter.version>
+        <junit.version>4.13.2</junit.version>
         <assertj.version>3.23.1</assertj.version>
         <hamcrest.version>1.3</hamcrest.version>
     </properties>
@@ -60,7 +60,6 @@
                 <version>3.3.2</version>
             </plugin>
             <plugin>
-                <!--https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
@@ -225,10 +224,16 @@
 
         <!--Test-->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -251,14 +256,6 @@
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
-        </dependency>
-
-        <!--        https://youtrack.jetbrains.com/issue/IDEA-231927  -->
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>1.9.1</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
