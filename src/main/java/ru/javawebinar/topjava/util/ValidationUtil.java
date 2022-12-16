@@ -7,6 +7,7 @@ import org.springframework.lang.NonNull;
 
 import org.springframework.validation.BindingResult;
 import ru.javawebinar.topjava.model.AbstractBaseEntity;
+import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import java.util.stream.Collectors;
 
@@ -63,5 +64,8 @@ public class ValidationUtil {
                         .map(fe -> String.format("[%s] %s", fe.getField(), fe.getDefaultMessage()))
                         .collect(Collectors.joining("<br>"))
         );
+    }
+
+    public static void validate(Meal meal) {
     }
 }
