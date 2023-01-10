@@ -26,18 +26,18 @@ public class ProfileUIController extends AbstractUserController {
         }
 
     @PostMapping
-    public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
-        public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status, @AuthenticationPrincipal AuthorizedUser authUser) {
+    public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status, @AuthenticationPrincipal AuthorizedUser authUser) {
+        public String updateProfile(@Validated(View.Web.class) UserTo userTo, BindingResult result, SessionStatus status, @AuthenticationPrincipal AuthorizedUser authUser) {
             if (result.hasErrors()) {
                 return "profile";
             }
-            super.update(userTo, SecurityUtil.authUserId());
-            SecurityUtil.get().setTo(userTo);
-            super.update(userTo, authUser.getId());
-            authUser.setTo(userTo);
-            status.setComplete();
-            return "redirect:/meals";
-        }
+        super.update(userTo, SecurityUtil.authUserId());
+        SecurityUtil.get().setTo(userTo);
+        super.update(userTo, authUser.getId());
+        authUser.setTo(userTo);
+        status.setComplete();
+        return "redirect:/meals";
+    }
 
     @GetMapping("/register")
     public String register(ModelMap model) {
