@@ -11,6 +11,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.web.SecurityUtil;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
