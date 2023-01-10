@@ -125,7 +125,7 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
         this.enabled = enabled;
     }
 
-    public int getCaloriesPerDay() {
+    public Integer getCaloriesPerDay() {
         return caloriesPerDay;
     }
 

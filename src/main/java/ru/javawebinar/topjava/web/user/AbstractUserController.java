@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import ru.javawebinar.topjava.model.AbstractBaseEntity;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.UserTo;
@@ -41,7 +42,7 @@ public abstract class AbstractUserController {
 
     public User create(UserTo userTo) {
         log.info("create {}", userTo);
-        checkNew(userTo);
+        checkNew((AbstractBaseEntity) userTo);
         return service.create(UsersUtil.createNewFromTo(userTo));
     }
 
@@ -64,7 +65,7 @@ public abstract class AbstractUserController {
 
     public void update(UserTo userTo, int id) {
         log.info("update {} with id={}", userTo, id);
-        assureIdConsistent(userTo, id);
+        assureIdConsistent((AbstractBaseEntity) userTo, id);
         service.update(userTo);
     }
 

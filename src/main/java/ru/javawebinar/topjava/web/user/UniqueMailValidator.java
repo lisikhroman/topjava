@@ -1,11 +1,13 @@
 package ru.javawebinar.topjava.web.user;
 
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import ru.javawebinar.topjava.HasIdAndEmail;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
@@ -15,12 +17,12 @@ import ru.javawebinar.topjava.web.SecurityUtil;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
-public class UniqueMailValidator implements org.springframework.validation.Validator {
+public class UniqueMailValidator implements Validator {
 
     private final UserRepository repository;
     private final HttpServletRequest request;
 
-    public UniqueMailValidator(UserRepository repository, @Nullable HttpServletRequest request) {
+    public UniqueMailValidator(@Qualifier("dataJpaUserRepository") UserRepository repository, @Nullable HttpServletRequest request) {
         this.repository = repository;
         this.request = request;
     }
@@ -45,7 +47,7 @@ public class UniqueMailValidator implements org.springframework.validation.Valid
                     // workaround for update with user.id=null in request body
                     // ValidationUtil.assureIdConsistent (id setter) called after this validation
                     String requestURI = request.getRequestURI();
-                    if (requestURI.endsWith("/" + dbId) || (dbId == SecurityUtil.get().getId() && requestURI.contains("/profile"))) return;
+                    if (requestURI.endsWith("/" + dbId) || (dbId == SecurityUtil.authUserId() && requestURI.contains("/profile"))) return;
                 }
                 errors.rejectValue("email", ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL);
             }
