@@ -4,8 +4,8 @@ package ru.javawebinar.topjava.util;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-
 import org.springframework.validation.BindingResult;
+
 import ru.javawebinar.topjava.model.AbstractBaseEntity;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import java.util.stream.Collectors;
